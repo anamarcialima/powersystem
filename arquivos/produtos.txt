@@ -1,0 +1,2 @@
+Nome do produto: sapo  Categoria do produto: animal  Quantidade: 23,00  Preço: 24,00  Data de vencimento: 555555  Data de cadastro: 2222
+Nome do produto: yudi  Categoria do produto: aaa  Quantidade: 0,00  Preço: 0,00  Data de vencimento: aaa  Data de cadastro: aaa

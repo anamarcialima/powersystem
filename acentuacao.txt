@@ -1,0 +1,18 @@
+tem uma maneira de tirar aqueles erros de acentuacao que n imprimi, no windows, vc faz assim:
+#ifdef _WIN32
+    extern int __stdcall SetConsoleOutputCP(unsigned wCodePageID);
+#endif
+
+la na main coloca:
+
+#ifdef _WIN32
+   // set console codepage to utf8
+   SetConsoleOutputCP(65001);
+#endif
+
+colocar isso aq  depois do stdio
+#ifdef _WIN32
+    extern int __stdcall SetConsoleOutputCP(unsigned wCodePageID);
+#endif
+
+esse #ifdef ai eh dizendo pro compilador, se for o windows,(_WIN32) faca tal coisa

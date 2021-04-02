@@ -1,5 +1,7 @@
 #include "funcoes.h"
 
+int opc = 0;
+
 int iniciar(){
 
     printf("-----------------------------------------------------------------------------------------------------------\n");
@@ -141,10 +143,14 @@ int cadastrarFuncionario(void){
     fgets(Funcionario.telefone,sizeof(Funcionario.telefone),stdin);
     fprintf(database_funcionarios, "Telefone: %s  ", Funcionario.telefone);
 
-    printf("Data de nascimento: ");
-    fgets(Funcionario.dataNascimento,sizeof(Funcionario.dataNascimento),stdin);
-    fprintf(database_funcionarios, "Data de nascimento: %s  ", Funcionario.dataNascimento);
-
+    do{
+        printf("Data de nascimento: ");
+        scanf("%d/%d/%d", &Funcionario.dataNascimento.dia, &Funcionario.dataNascimento.mes, &Funcionario.dataNascimento.ano);
+        opc = verificarData(Funcionario.dataNascimento.dia, Funcionario.dataNascimento.mes,Funcionario.dataNascimento.ano);
+    }while(opc != 1);
+    
+    fprintf(database_funcionarios, "Data de nascimento: %d/%d/%d  ", Funcionario.dataNascimento.dia, Funcionario.dataNascimento.mes,Funcionario.dataNascimento.ano);
+    
     printf("Cargo: ");
     fgets(Funcionario.cargo,sizeof(Funcionario.cargo),stdin);
     fprintf(database_funcionarios, "Cargo: %s\n\n", Funcionario.cargo);
@@ -257,14 +263,22 @@ int cadastrarProduto(void){
     printf("Pre�o: ");
     scanf("%f%*c", &Produtos.preco);
     fprintf(database_produtos, "Pre�o: %.2f  ", Produtos.preco);
+    
+    do{    
+        printf("Data de vencimento: ");
+        scanf("%d/%d/%d", &Produtos.dataDeVencimento.dia, &Produtos.dataDeVencimento.mes, &Produtos.dataDeVencimento.ano);
+        opc = verificarData(Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.ano);
+    }while(opc != 1);
 
-    printf("Data de vencimento: ");
-    scanf("%[^\n]%*c", Produtos.dataDeVencimento);
-    fprintf(database_produtos, "Data de vencimento: %s  ", Produtos.dataDeVencimento);
+    fprintf(database_produtos, "Data de vencimento: %d/%d/%d  ", Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.dia);
 
-    printf("Data de cadastro: ");
-    scanf("%[^\n]%*c", Produtos.dataDeCadastro);
-    fprintf(database_produtos, "Data de cadastro: %s\n", Produtos.dataDeCadastro);
+    do{    
+        printf("Data de Cadastro: ");
+        scanf("%d/%d/%d", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
+        opc = verificarData(Produtos.dataDeCadastro.dia, Produtos.dataDeCadastro.mes,Produtos.dataDeCadastro.ano);
+    }while(opc != 1);
+
+    fprintf(database_produtos, "Data de cadastro: %d/%d/%d\n", Produtos.dataDeCadastro.dia,Produtos.dataDeCadastro.mes,Produtos.dataDeCadastro.ano);
 
     printf("\nProduto cadastrado com sucesso!\n\n");
     printf("\n-----------------------------------------------------------------------------------------------------------\n");
@@ -339,4 +353,36 @@ int removerProdutos(){
     rename("arquivos/ProdutosRecent.txt", "arquivos/produtos.txt");
 
     return 0;
+}
+
+int verificarData(int dia, int mes, int ano){
+    if (ano >= 1900 && ano <= 9999)
+    {
+        //check month
+        if (mes >= 1 && mes <= 12)
+        {
+            //check days
+            if ((dia >= 1 && dia <= 31) && (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12))
+                return 1;
+            else if ((dia >= 1 && dia <= 30) && (mes == 4 || mes == 6 || mes == 9 || mes == 11))
+                return 1;
+            else if ((dia >= 1 && dia <= 28) && (mes == 2))
+                return 1;
+            else if (dia == 29 && mes == 2 && (ano % 400 == 0 || (ano % 4 == 0 && ano % 100 != 0)))
+                return 1;
+            else
+                printf("Dia invalido! Digite novamente!\n");
+                return 0;
+        }
+        else
+        {
+            printf("Mes invalido! Digite novamente!\n");
+            return 0;
+        }
+    }
+    else
+    {
+        printf("Ano invalido! Digite novamente!\n");
+        return 0;
+    }
 }

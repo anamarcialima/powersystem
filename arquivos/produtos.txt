@@ -1,3 +1,0 @@
-  Categoria do produto: 2  Quantidade: 3.00  Pre�o: 4.00  Data de vencimento: 15022002  Data de cadastro: 104
-Nome do produto: arroz
-  Categoria do produto: f  Quantidade: 3.00  Pre�o: 2.00  Data de vencimento: 14  Data de cadastro: 2

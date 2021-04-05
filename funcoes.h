@@ -3,7 +3,6 @@
 #include <string.h>
 #include <locale.h>
 
-//DADOS DO FUNCIONÁRIO
 typedef struct data Data;
 
 struct data{
@@ -12,17 +11,15 @@ struct data{
     int ano;
 };
 
-//DADOS DO FUNCIONÁRIO
 struct funcionario{
     char nomeDoFuncionario[200];
     char email[100];
     char senha[10];
-    char telefone[15];
+    int telefone;
     Data dataNascimento;
     char cargo[15];
 }Funcionario;
 
-//DADOS DO PRODUTO
 struct produtos{
     char id;
     char nomeDoProduto[200];
@@ -33,15 +30,17 @@ struct produtos{
     Data dataDeCadastro;
 }Produtos;
 
-FILE *database_funcionarios; // cria variável ponteiro para a BASE DE DADOS DOS FUNCIONÁRIOS
-FILE *database_produtos; // cria variável ponteiro para a BASE DE DADOS DOS PRODUTOS
+int opc;
 
-int iniciar();
-int menu();
+FILE *database_funcionarios; // base de dados dos funcionarios
+FILE *database_produtos; // base de dados dos produtos
+
+void iniciar();
+void menu();
 int verificarData(int dia, int mes, int ano);
 int cadastrarFuncionario(void);
 int login(void);
 int cadastrarProduto(void);
 int listarProdutos(void);
 int removerProdutos(void);
-int atualizarProduto();
+void atualizarProduto();

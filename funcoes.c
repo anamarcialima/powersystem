@@ -118,28 +118,27 @@ void menu(){
 
 }
 
-int verificarData(int dia, int mes, int ano){
+int verificarData(Data verificando){
 
-    if (ano >= 1900 && ano <= 9999){
-        if (mes >= 1 && mes <= 12){
-            if ((dia >= 1 && dia <= 31) && (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12)){
+    if (verificando.ano >= 1900 && verificando.ano <= 9999){
+        if (verificando.mes >= 1 && verificando.mes <= 12){
+            if ((verificando.dia >= 1 && verificando.dia <= 31) && (verificando.mes == 1 || verificando.mes == 3 || verificando.mes == 5 || verificando.mes == 7 || verificando.mes == 8 || verificando.mes == 10 || verificando.mes == 12)){
+            }else if ((verificando.dia >= 1 && verificando.dia <= 30) && (verificando.mes == 4 || verificando.mes == 6 || verificando.mes == 9 || verificando.mes == 11)){
                 return 1;
-            }else if ((dia >= 1 && dia <= 30) && (mes == 4 || mes == 6 || mes == 9 || mes == 11)){
+            }else if ((verificando.dia >= 1 && verificando.dia <= 28) && (verificando.mes == 2)){
                 return 1;
-            }else if ((dia >= 1 && dia <= 28) && (mes == 2)){
-                return 1;
-            }else if (dia == 29 && mes == 2 && (ano % 400 == 0 || (ano % 4 == 0 && ano % 100 != 0))){
+            }else if (verificando.dia == 29 && verificando.mes == 2 && (verificando.ano % 400 == 0 || (verificando.ano % 4 == 0 && verificando.ano % 100 != 0))){
                 return 1;
             }else{
-                printf("\nDia invalido! Digite novamente!\n");
+                printf("\nDia invalido! Digite novamente!\n\n");
                 return 0;
             }
         }else{
-            printf("Mes invalido! Digite novamente!\n");
+            printf("Mes invalido! Digite novamente!\n\n");
             return 0;
         }
     }else{
-        printf("Ano invalido! Digite novamente!\n");
+        printf("Ano invalido! Digite novamente!\n\n");
         return 0;
     }
 }
@@ -175,11 +174,9 @@ int cadastrarFuncionario(void){
     do{
         printf("Data de nascimento: ");
         scanf("%d/%d/%d%*c", &Funcionario.dataNascimento.dia, &Funcionario.dataNascimento.mes, &Funcionario.dataNascimento.ano);
-        opc = verificarData(Funcionario.dataNascimento.dia, Funcionario.dataNascimento.mes,Funcionario.dataNascimento.ano);
-    }while(opc != 1);
+    }while(verificarData(Funcionario.dataNascimento) != 1);
 
     fprintf(database_funcionarios, "Data de nascimento: %d/%d/%d  ", Funcionario.dataNascimento.dia, Funcionario.dataNascimento.mes,Funcionario.dataNascimento.ano);
-
 
     printf("Cargo: ");
     scanf("%[^\n]%*c", Funcionario.cargo);
@@ -221,19 +218,27 @@ int cadastrarProduto(void){
     do{
         printf("Data de vencimento: ");
         scanf("%d/%d/%d%*c", &Produtos.dataDeVencimento.dia, &Produtos.dataDeVencimento.mes, &Produtos.dataDeVencimento.ano);
-        opc = verificarData(Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.ano);
-    }while(opc != 1);
-
-    fprintf(database_produtos, "Data de vencimento: %d/%d/%d ", Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.dia);
-
+    }while(verificarData(Produtos.dataDeVencimento) == 0);
+    
     do{
         printf("Data de Cadastro: ");
         scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
-        opc = verificarData(Produtos.dataDeCadastro.dia, Produtos.dataDeCadastro.mes,Produtos.dataDeCadastro.ano);
-    }while(opc != 1);
+    }while(verificarData(Produtos.dataDeCadastro) == 0);
 
+    while(verificarProdutoVencido(Produtos.dataDeCadastro,Produtos.dataDeVencimento) == 0){
+        do{
+            printf("Data de vencimento: ");
+            scanf("%d/%d/%d%*c", &Produtos.dataDeVencimento.dia, &Produtos.dataDeVencimento.mes, &Produtos.dataDeVencimento.ano);
+        }while(verificarData(Produtos.dataDeVencimento) == 0);
+    
+        do{
+            printf("Data de Cadastro: ");
+            scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
+        }while(verificarData(Produtos.dataDeCadastro) == 0);
+    }
+    fprintf(database_produtos, "Data de vencimento: %d/%d/%d ", Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.dia);
     fprintf(database_produtos, "Data de cadastro: %d/%d/%d\n", Produtos.dataDeCadastro.dia,Produtos.dataDeCadastro.mes,Produtos.dataDeCadastro.ano);
-
+    
     fclose(database_produtos);
     return 0;
 }
@@ -306,5 +311,28 @@ void atualizarProduto(){
         printf("Produto atualizado com sucesso!\n");
     }else{
         printf("Erro ao atualizar o produto\n");
+    }
+}
+
+int verificarProdutoVencido(Data cadastro, Data vencimento){
+    // checar dia
+    if(cadastro.ano <= vencimento.ano){
+        //checar mes
+        if(cadastro.mes <= vencimento.mes){
+            //checar ano
+            if(cadastro.dia < vencimento.dia){
+                return 1;
+            }else{
+                printf("Data inválida ou Produto vencido!!!\n");
+                return 0;
+            }
+        }else{
+            printf("Data inválida ou Produto vencido!!!\n");
+            return 0;
+            
+        }
+    }else{
+        printf("Data inválida ou Produto vencido!\n");
+        return 0;
     }
 }

@@ -37,10 +37,11 @@ FILE *database_produtos; // base de dados dos produtos
 
 void iniciar();
 void menu();
-int verificarData(int dia, int mes, int ano);
+int verificarData(Data verificando);
 int cadastrarFuncionario(void);
 int login(void);
 int cadastrarProduto(void);
 int listarProdutos(void);
 int removerProdutos(void);
 void atualizarProduto();
+int verificarProdutoVencido(Data cadastro, Data vencimento);

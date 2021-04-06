@@ -254,13 +254,15 @@ int listarProdutos(void){
             ++id;
         }while(fgets(dados, 1001, database_produtos) != NULL);
     }
-
+    
     fclose(database_produtos);
-    return 0;
+    return id - 1;
 }
 
 int removerProdutos(){
-        listarProdutos();
+
+        int id = listarProdutos();
+        printf("o ID total -> %d\n",id);
 
         database_produtos = fopen("arquivos/produtos.txt", "r");
         FILE* new_databaseProdutos = fopen("arquivos/ProdutosRecent.txt","w");
@@ -270,7 +272,10 @@ int removerProdutos(){
 
         printf("\nDigite o id do produto: ");
         scanf("%u%*c",&linha_selecionada);
-
+        if(linha_selecionada > id || linha_selecionada <= 0){
+            printf("produto invalido!\n");
+            return 0;
+        }
         unsigned int linha_atual = 1;
 
         while(fgets(texto, 1001, database_produtos) != NULL){

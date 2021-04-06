@@ -19,7 +19,7 @@ int login(void){
 
     printf("Senha: ");
     scanf("%[^\n]%*c", senha);
-    
+    system("clear");
     menu();
 
 }
@@ -42,11 +42,14 @@ void iniciar(){
         switch(opcao){
             case 1:
                 login();
+                system("clear");
                 break;
             case 2:
+                system("clear");
                 cadastrarFuncionario();
                 break;
             case 3:
+                system("clear");
                 exit(0);
                 break;
             default:
@@ -59,7 +62,7 @@ void iniciar(){
 }
 
 void menu(){
-
+    system("clear");
     printf("-----------------------------------------------------------------------------------------------------------\n\n");
     printf("\n\t\t\t\t    OLA, SEJA BEM VINDO AO POWER SYSTEM!\n\n");
 
@@ -71,7 +74,7 @@ void menu(){
         printf("1 - Cadastrar produto | 2 - Atualizar produto | 3 - Deletar produto | 4 - Estoque total | 5 - Logout\n\nO que voce deseja fazer? ");
         scanf("%d%*c", &opcao);
         printf("\n");
-
+        system("clear");
         switch(opcao){
             case 1:
                 printf("\n-----------------------------------------------------------------------------------------------------------\n");
@@ -84,20 +87,24 @@ void menu(){
                 menu();
                 break;
             case 2:
+                system("clear");
                 atualizarProduto();
                 menu();
                 break;
             case 3:
+                system("clear");
                 removerProdutos();
                 menu();
                 break;
 
             case 4:
+                system("clear");
                 listarProdutos();
                 menu();
                 break;
 
             case 5:
+                system("clear");
                 iniciar();
                 break;
 
@@ -293,8 +300,8 @@ int removerProdutos(){
 }
 
 void atualizarProduto(){
-    listarProdutos();
     removerProdutos();
+    system("clear");
     if( cadastrarProduto() == 0){
         printf("Produto atualizado com sucesso!\n");
     }else{

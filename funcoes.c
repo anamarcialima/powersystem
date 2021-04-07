@@ -284,8 +284,7 @@ int atualizarProduto(){
         FILE* new_databaseProdutos = fopen("arquivos/ProdutosRecent.txt","w");
 
         if(database_produtos == NULL || new_databaseProdutos == NULL){
-            printf("\nUnable to open file.\n");
-            printf("Please check whether file exists and you have read/write privilege.\n");
+            printf("\n [ERRO]: Nao foi possivel abrir o arquivo\n");
             return 0;
         }
 

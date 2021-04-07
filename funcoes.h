@@ -36,12 +36,11 @@ FILE *database_funcionarios; // base de dados dos funcionarios
 FILE *database_produtos; // base de dados dos produtos
 
 void iniciar();
+int login();
+int cadastrarFuncionario();
 void menu();
 int verificarData(Data verificando);
-int cadastrarFuncionario(void);
-int login(void);
-int cadastrarProduto(void);
-int listarProdutos(void);
-int removerProdutos(void);
+int cadastrarProduto();
+int removerProdutos();
 int atualizarProduto();
-int verificarProdutoVencido(Data cadastro, Data vencimento);
+int listarProdutos();

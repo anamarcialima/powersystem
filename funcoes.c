@@ -38,7 +38,6 @@ void iniciar(){
 }
 
 void menu(){
-    system("clear");
     printf("-----------------------------------------------------------------------------------------------------------\n\n");
     printf("\n\t\t\t\t    OLA, SEJA BEM VINDO AO POWER SYSTEM!\n\n");
 
@@ -85,7 +84,7 @@ void menu(){
                 break;
 
             default:
-                printf("Opção inválida! \n\n");
+                printf("Opcao invalida! \n\n");
                 cont++;
                 printf("\n-----------------------------------------------------------------------------------------------------------\n");
                 break;
@@ -119,7 +118,7 @@ int verificarData(Data verificando){
     }
 }
 
-int cadastrarFuncionario(void){
+int cadastrarFuncionario(){
 
     printf("\n\n-----------------------------------------------------------------------------------------------------------\n");
     printf("\t\t\t\t\t\t FAZER CADASTRO \n\n");
@@ -166,7 +165,7 @@ int cadastrarFuncionario(void){
 
 }
 
-int cadastrarProduto(void){
+int cadastrarProduto(){
 
     database_produtos = fopen("arquivos/produtos.txt", "a");
 
@@ -201,27 +200,14 @@ int cadastrarProduto(void){
         scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
     }while(verificarData(Produtos.dataDeCadastro) == 0);
 
-    while(verificarProdutoVencido(Produtos.dataDeCadastro,Produtos.dataDeVencimento) == 1){
-        do{
-            printf("Data de vencimento: ");
-            scanf("%d/%d/%d%*c", &Produtos.dataDeVencimento.dia, &Produtos.dataDeVencimento.mes, &Produtos.dataDeVencimento.ano);
-        }while(verificarData(Produtos.dataDeVencimento) == 0);
-    
-        do{
-            printf("Data de Cadastro: ");
-            scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
-        }while(verificarData(Produtos.dataDeCadastro) == 0);
-    }
-
-    fprintf(database_produtos, "Data de vencimento: %d/%d/%d ", Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.dia);
+    fprintf(database_produtos, "Data de vencimento: %d/%d/%d ", Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.ano);
     fprintf(database_produtos, "Data de cadastro: %d/%d/%d\n", Produtos.dataDeCadastro.dia,Produtos.dataDeCadastro.mes,Produtos.dataDeCadastro.ano);
     
     fclose(database_produtos);
     return 0;
 }
 
-int listarProdutos(void){
-
+int listarProdutos(){
     database_produtos = fopen("arquivos/produtos.txt", "a+");
 
     if(database_produtos == NULL){
@@ -239,7 +225,7 @@ int listarProdutos(void){
         return 0;
     }else{
         do{
-            printf("Codigo do produto: %d  %s", id, dados);
+            printf("ID: %d  %s", id, dados);
             ++id;
         }while(fgets(dados, 1001, database_produtos) != NULL);
     }
@@ -251,25 +237,24 @@ int listarProdutos(void){
 int removerProdutos(){
 
         int id = listarProdutos();
-        printf("o ID total -> %d\n",id);
 
         database_produtos = fopen("arquivos/produtos.txt", "r+");
         FILE* new_databaseProdutos = fopen("arquivos/ProdutosRecent.txt","w");
 
-        char texto[1001];
+        char buffer[1001];
         unsigned int linha_selecionada;
 
         printf("\nDigite o id do produto: ");
         scanf("%u%*c",&linha_selecionada);
         if(linha_selecionada > id || linha_selecionada <= 0){
-            printf("produto invalido!\n");
+            printf("id do produto invalido!\n");
             return 0;
         }
         unsigned int linha_atual = 1;
 
-        while(fgets(texto, 1001, database_produtos) != NULL){
+        while(fgets(buffer, 1001, database_produtos) != NULL){
             if(linha_atual != linha_selecionada){
-                fputs(texto, new_databaseProdutos);
+                fputs(buffer, new_databaseProdutos);
             }
             linha_atual += 1;
         }
@@ -283,15 +268,18 @@ int removerProdutos(){
 
 int atualizarProduto(){
         int id = listarProdutos();
-        printf("o ID total -> %d\n",id);
 
         char buffer[1001];
-        int linha_selecionada,count;
+        int linha_selecionada,linha_atual;
 
         printf("Digite o id do produto para atualizar: ");
         scanf("%d%*c",&linha_selecionada);
         
-
+        if(linha_selecionada > id || linha_selecionada <= 0){
+            printf("id do produto invalido!\n");
+            return 0;
+        }
+        
         database_produtos = fopen("arquivos/produtos.txt", "r");
         FILE* new_databaseProdutos = fopen("arquivos/ProdutosRecent.txt","w");
 
@@ -301,11 +289,10 @@ int atualizarProduto(){
             return 0;
         }
 
-        count = 0;
+        linha_atual = 0;
         while(fgets(buffer,1001,database_produtos) != NULL){
-            count++;
-            if(count == linha_selecionada){
-                fputs("",new_databaseProdutos);
+            linha_atual++;
+            if(linha_atual == linha_selecionada){
                 printf("Nome do produto: ");
                 scanf("%[^\n]%*c", Produtos.nomeDoProduto);
                 fprintf(new_databaseProdutos, "Nome do produto: %s ", Produtos.nomeDoProduto);
@@ -326,31 +313,20 @@ int atualizarProduto(){
                     printf("Data de vencimento: ");
                     scanf("%d/%d/%d%*c", &Produtos.dataDeVencimento.dia, &Produtos.dataDeVencimento.mes, &Produtos.dataDeVencimento.ano);
                 }while(verificarData(Produtos.dataDeVencimento) == 0);
-                
+    
                 do{
                     printf("Data de Cadastro: ");
                     scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
                 }while(verificarData(Produtos.dataDeCadastro) == 0);
 
-                while(verificarProdutoVencido(Produtos.dataDeCadastro,Produtos.dataDeVencimento) == 1){
-                    do{
-                        printf("Data de vencimento: ");
-                        scanf("%d/%d/%d%*c", &Produtos.dataDeVencimento.dia, &Produtos.dataDeVencimento.mes, &Produtos.dataDeVencimento.ano);
-                    }while(verificarData(Produtos.dataDeVencimento) == 0);
-                
-                    do{
-                        printf("Data de Cadastro: ");
-                        scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
-                    }while(verificarData(Produtos.dataDeCadastro) == 0);
-                }
-                
-                fprintf(new_databaseProdutos, "Data de vencimento: %d/%d/%d ", Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.dia);
+                fprintf(new_databaseProdutos, "Data de vencimento: %d/%d/%d ", Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.ano);
                 fprintf(new_databaseProdutos, "Data de cadastro: %d/%d/%d\n", Produtos.dataDeCadastro.dia,Produtos.dataDeCadastro.mes,Produtos.dataDeCadastro.ano);
-         
+    
             }else{
                 fputs(buffer,new_databaseProdutos);
             }
         }
+        
         fclose(database_produtos);
         fclose(new_databaseProdutos);
 
@@ -359,30 +335,7 @@ int atualizarProduto(){
         return 1;
 }
 
-int verificarProdutoVencido(Data cadastro, Data vencimento){
-    // checar dia
-    if(cadastro.ano <= vencimento.ano){
-        //checar mes
-        if(cadastro.mes <= vencimento.mes){
-            //checar ano
-            if(cadastro.dia < vencimento.dia){
-                return 1;
-            }else{
-                printf("Data inválida ou Produto vencido!!!\n");
-                return 0;
-            }
-        }else{
-            printf("Data inválida ou Produto vencido!!!\n");
-            return 0;
-            
-        }
-    }else{
-        printf("Data inválida ou Produto vencido!\n");
-        return 0;
-    }
-}
-
-int login(void){
+int login(){
 
     database_funcionarios = fopen("arquivos/funcionarios.txt", "r+");
 

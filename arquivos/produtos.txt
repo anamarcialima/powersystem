@@ -1,6 +1,1 @@
-Nome do produto: a Categoria do produto: b Quantidade: 2.00 Preco: 3.00 Data de vencimento: 3/4/3 Data de cadastro: 15/2/2002
-2
-Nome do produto: feijao Categoria do produto: feijao Quantidade: 2.00 Preco: 2.00 Data de vencimento: 3/4/3 Data de cadastro: 15/2/2002
-4
-5
-Nome do produto: a Categoria do produto: b Quantidade: 2.00 Preco: 3.00 Data de vencimento: 3/4/3 Data de cadastro: 15/2/2002
+Nome do produto: mamao Categoria do produto: fruta Quantidade: 3.00 Preco: 3.00 Data de vencimento: 2/12/2021 Data de cadastro: 1/3/2021

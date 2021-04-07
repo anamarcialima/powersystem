@@ -1,3 +1,6 @@
-Nome do produto: a Categoria do produto: a Quantidade: 3.00 Preco: 3.00 Data de vencimento: 3/3/3 Data de cadastro: 1/1/2003
-Nome do produto: c Categoria do produto: d Quantidade: 3.00 Preco: 4.00 Data de vencimento: 3/3/3 Data de cadastro: 2/3/2002
-Nome do produto: a Categoria do produto: b Quantidade: 3.00 Preco: 4.00 Data de vencimento: 3/3/3 Data de cadastro: 2/3/2003
+Nome do produto: a Categoria do produto: b Quantidade: 2.00 Preco: 3.00 Data de vencimento: 3/4/3 Data de cadastro: 15/2/2002
+2
+Nome do produto: feijao Categoria do produto: feijao Quantidade: 2.00 Preco: 2.00 Data de vencimento: 3/4/3 Data de cadastro: 15/2/2002
+4
+5
+Nome do produto: a Categoria do produto: b Quantidade: 2.00 Preco: 3.00 Data de vencimento: 3/4/3 Data de cadastro: 15/2/2002

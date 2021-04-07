@@ -43,5 +43,5 @@ int login(void);
 int cadastrarProduto(void);
 int listarProdutos(void);
 int removerProdutos(void);
-void atualizarProduto();
+int atualizarProduto();
 int verificarProdutoVencido(Data cadastro, Data vencimento);

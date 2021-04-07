@@ -1,29 +1,5 @@
 #include "funcoes.h"
 
-int login(void){
-
-    database_funcionarios = fopen("arquivos/funcionarios.txt", "r+");
-
-    if(database_funcionarios == NULL){
-        printf("Erro na abertura do arquivo funcionarios.txt!\n\n");
-        return 0;
-    }
-
-    printf("\n-----------------------------------------------------------------------------------------------------------\n");
-    printf("\t\t\t\t\t\t    LOGIN \n\n");
-
-    char email[100], senha[10];
-
-    printf("E-mail: ");
-    scanf("%[^\n]%*c", email);
-
-    printf("Senha: ");
-    scanf("%[^\n]%*c", senha);
-    system("clear");
-    menu();
-
-}
-
 void iniciar(){
 
     printf("-----------------------------------------------------------------------------------------------------------\n");
@@ -174,7 +150,7 @@ int cadastrarFuncionario(void){
     do{
         printf("Data de nascimento: ");
         scanf("%d/%d/%d%*c", &Funcionario.dataNascimento.dia, &Funcionario.dataNascimento.mes, &Funcionario.dataNascimento.ano);
-    }while(verificarData(Funcionario.dataNascimento) != 1);
+    }while(verificarData(Funcionario.dataNascimento) == 0);
 
     fprintf(database_funcionarios, "Data de nascimento: %d/%d/%d  ", Funcionario.dataNascimento.dia, Funcionario.dataNascimento.mes,Funcionario.dataNascimento.ano);
 
@@ -225,7 +201,7 @@ int cadastrarProduto(void){
         scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
     }while(verificarData(Produtos.dataDeCadastro) == 0);
 
-    while(verificarProdutoVencido(Produtos.dataDeCadastro,Produtos.dataDeVencimento) == 0){
+    while(verificarProdutoVencido(Produtos.dataDeCadastro,Produtos.dataDeVencimento) == 1){
         do{
             printf("Data de vencimento: ");
             scanf("%d/%d/%d%*c", &Produtos.dataDeVencimento.dia, &Produtos.dataDeVencimento.mes, &Produtos.dataDeVencimento.ano);
@@ -236,6 +212,7 @@ int cadastrarProduto(void){
             scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
         }while(verificarData(Produtos.dataDeCadastro) == 0);
     }
+
     fprintf(database_produtos, "Data de vencimento: %d/%d/%d ", Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.dia);
     fprintf(database_produtos, "Data de cadastro: %d/%d/%d\n", Produtos.dataDeCadastro.dia,Produtos.dataDeCadastro.mes,Produtos.dataDeCadastro.ano);
     
@@ -259,7 +236,7 @@ int listarProdutos(void){
 
     if(fgets(dados, 1001, database_produtos) == NULL){
         printf("Estoque vazio\n\n");
-        menu();
+        return 0;
     }else{
         do{
             printf("Codigo do produto: %d  %s", id, dados);
@@ -276,7 +253,7 @@ int removerProdutos(){
         int id = listarProdutos();
         printf("o ID total -> %d\n",id);
 
-        database_produtos = fopen("arquivos/produtos.txt", "r");
+        database_produtos = fopen("arquivos/produtos.txt", "r+");
         FILE* new_databaseProdutos = fopen("arquivos/ProdutosRecent.txt","w");
 
         char texto[1001];
@@ -304,14 +281,82 @@ int removerProdutos(){
         rename("arquivos/ProdutosRecent.txt", "arquivos/produtos.txt");
 }
 
-void atualizarProduto(){
-    removerProdutos();
-    system("clear");
-    if( cadastrarProduto() == 0){
-        printf("Produto atualizado com sucesso!\n");
-    }else{
-        printf("Erro ao atualizar o produto\n");
-    }
+int atualizarProduto(){
+        int id = listarProdutos();
+        printf("o ID total -> %d\n",id);
+
+        char buffer[1001];
+        int linha_selecionada,count;
+
+        printf("Digite o id do produto para atualizar: ");
+        scanf("%d%*c",&linha_selecionada);
+        
+
+        database_produtos = fopen("arquivos/produtos.txt", "r");
+        FILE* new_databaseProdutos = fopen("arquivos/ProdutosRecent.txt","w");
+
+        if(database_produtos == NULL || new_databaseProdutos == NULL){
+            printf("\nUnable to open file.\n");
+            printf("Please check whether file exists and you have read/write privilege.\n");
+            return 0;
+        }
+
+        count = 0;
+        while(fgets(buffer,1001,database_produtos) != NULL){
+            count++;
+            if(count == linha_selecionada){
+                fputs("",new_databaseProdutos);
+                printf("Nome do produto: ");
+                scanf("%[^\n]%*c", Produtos.nomeDoProduto);
+                fprintf(new_databaseProdutos, "Nome do produto: %s ", Produtos.nomeDoProduto);
+
+                printf("Categoria do produto: ");
+                scanf("%[^\n]%*c", Produtos.categoriaDoProduto);
+                fprintf(new_databaseProdutos, "Categoria do produto: %s ", Produtos.categoriaDoProduto);
+
+                printf("Quantidade: ");
+                scanf("%f%*c", &Produtos.quantidade);
+                fprintf(new_databaseProdutos, "Quantidade: %.2f ", Produtos.quantidade);
+
+                printf("Preco/unidade: ");
+                scanf("%f%*c", &Produtos.preco);
+                fprintf(new_databaseProdutos, "Preco: %.2f ", Produtos.preco);
+
+                do{
+                    printf("Data de vencimento: ");
+                    scanf("%d/%d/%d%*c", &Produtos.dataDeVencimento.dia, &Produtos.dataDeVencimento.mes, &Produtos.dataDeVencimento.ano);
+                }while(verificarData(Produtos.dataDeVencimento) == 0);
+                
+                do{
+                    printf("Data de Cadastro: ");
+                    scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
+                }while(verificarData(Produtos.dataDeCadastro) == 0);
+
+                while(verificarProdutoVencido(Produtos.dataDeCadastro,Produtos.dataDeVencimento) == 1){
+                    do{
+                        printf("Data de vencimento: ");
+                        scanf("%d/%d/%d%*c", &Produtos.dataDeVencimento.dia, &Produtos.dataDeVencimento.mes, &Produtos.dataDeVencimento.ano);
+                    }while(verificarData(Produtos.dataDeVencimento) == 0);
+                
+                    do{
+                        printf("Data de Cadastro: ");
+                        scanf("%d/%d/%d%*c", &Produtos.dataDeCadastro.dia, &Produtos.dataDeCadastro.mes, &Produtos.dataDeCadastro.ano);
+                    }while(verificarData(Produtos.dataDeCadastro) == 0);
+                }
+                
+                fprintf(new_databaseProdutos, "Data de vencimento: %d/%d/%d ", Produtos.dataDeVencimento.dia, Produtos.dataDeVencimento.mes,Produtos.dataDeVencimento.dia);
+                fprintf(new_databaseProdutos, "Data de cadastro: %d/%d/%d\n", Produtos.dataDeCadastro.dia,Produtos.dataDeCadastro.mes,Produtos.dataDeCadastro.ano);
+         
+            }else{
+                fputs(buffer,new_databaseProdutos);
+            }
+        }
+        fclose(database_produtos);
+        fclose(new_databaseProdutos);
+
+        remove("arquivos/produtos.txt");
+        rename("arquivos/ProdutosRecent.txt", "arquivos/produtos.txt");
+        return 1;
 }
 
 int verificarProdutoVencido(Data cadastro, Data vencimento){
@@ -335,4 +380,28 @@ int verificarProdutoVencido(Data cadastro, Data vencimento){
         printf("Data inválida ou Produto vencido!\n");
         return 0;
     }
+}
+
+int login(void){
+
+    database_funcionarios = fopen("arquivos/funcionarios.txt", "r+");
+
+    if(database_funcionarios == NULL){
+        printf("Erro na abertura do arquivo funcionarios.txt!\n\n");
+        return 0;
+    }
+
+    printf("\n-----------------------------------------------------------------------------------------------------------\n");
+    printf("\t\t\t\t\t\t    LOGIN \n\n");
+
+    char email[100], senha[10];
+
+    printf("E-mail: ");
+    scanf("%[^\n]%*c", email);
+
+    printf("Senha: ");
+    scanf("%[^\n]%*c", senha);
+    system("clear");
+    menu();
+
 }

@@ -1,4 +1,4 @@
-# Sistema-de-gerenciameto-de-estoque-C
+# Sistema-de-gerenciamento-de-estoque-C
 
 Trabalho da disciplina de Laboratório - Primeiro Periodo!
 

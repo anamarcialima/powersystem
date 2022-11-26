@@ -1,4 +1,6 @@
-#include "funcoes.h"
+#include "data.h"
+#include "funcionario.h"
+#include "produto.h" 
 
 void menu(){
     printf("-----------------------------------------------------------------------------------------------------------\n\n");

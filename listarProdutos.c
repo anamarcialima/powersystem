@@ -1,4 +1,6 @@
-#include "funcoes.h"
+#include "data.h"
+#include "funcionario.h"
+#include "produto.h" 
 
 int listarProdutos(){
     database_produtos = fopen("arquivos/produtos.txt", "a+");

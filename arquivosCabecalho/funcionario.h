@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include "data.h"
 
 struct funcionario{
     char nomeDoFuncionario[200];
@@ -15,9 +14,9 @@ struct funcionario{
 
 int opc;
 
-FILE *database_funcionarios; // base de dados dos funcionarios
+FILE *baseDeDadosFuncionarios;
 
-void iniciar();
+void menuInicial();
 int login();
 int cadastrarFuncionario();
-void menu();
+void menuPrincipal();

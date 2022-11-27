@@ -1,35 +1,36 @@
-#include "data.h"
-#include "funcionario.h"
-#include "produto.h" 
+#include "arquivosCabecalho/data.h"
+#include "arquivosCabecalho/funcionario.h"
+#include "arquivosCabecalho/produto.h"
 
 int removerProdutos(){
 
-        int id = listarProdutos();
+    int id = listarProdutos();
 
-        database_produtos = fopen("arquivos/produtos.txt", "r+");
-        FILE* new_databaseProdutos = fopen("arquivos/ProdutosRecent.txt","w");
+    baseDeDadosProdutos = fopen("baseDeDados/produtos.txt", "r+");
+    FILE* novaBaseDeDadosProdutos = fopen("baseDeDados/ProdutosRecentes.txt","w");
 
-        char buffer[1001];
-        unsigned int linha_selecionada;
+    char buffer[1001];
+    unsigned int linha_selecionada;
 
-        printf("\nDigite o id do produto: ");
-        scanf("%u%*c",&linha_selecionada);
-        if(linha_selecionada > id || linha_selecionada <= 0){
-            printf("id do produto invalido!\n");
-            return 0;
+    printf("\nDigite o id do produto: ");
+    scanf("%u%*c",&linha_selecionada);
+    if(linha_selecionada > id || linha_selecionada <= 0){
+        printf("id do produto invalido!\n");
+        return 0;
+    }
+    unsigned int linha_atual = 1;
+
+    while(fgets(buffer, 1001, baseDeDadosProdutos) != NULL){
+        if(linha_atual != linha_selecionada){
+            fputs(buffer, novaBaseDeDadosProdutos);
         }
-        unsigned int linha_atual = 1;
+        linha_atual += 1;
+    }
 
-        while(fgets(buffer, 1001, database_produtos) != NULL){
-            if(linha_atual != linha_selecionada){
-                fputs(buffer, new_databaseProdutos);
-            }
-            linha_atual += 1;
-        }
+    fclose(baseDeDadosProdutos);
+    fclose(novaBaseDeDadosProdutos);
 
-        fclose(database_produtos);
-        fclose(new_databaseProdutos);
+    remove("baseDeDados/produtos.txt");
+    rename("baseDeDados/ProdutosRecentes.txt", "baseDeDados/produtos.txt");
 
-        remove("arquivos/produtos.txt");
-        rename("arquivos/ProdutosRecent.txt", "arquivos/produtos.txt");
 }

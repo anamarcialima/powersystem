@@ -1,20 +1,20 @@
-#include "data.h"
-#include "funcionario.h"
-#include "produto.h" 
+#include "arquivosCabecalho/data.h"
+#include "arquivosCabecalho/funcionario.h"
+#include "arquivosCabecalho/produto.h"
 
-void iniciar(){
+void menuInicial(){
 
     printf("-----------------------------------------------------------------------------------------------------------\n");
     printf("\t\t\t\t\t\t POWER SYSTEM \n");
     printf("-----------------------------------------------------------------------------------------------------------\n");
     printf("\t\t\t OBS: O programa a seguir nao reconhece acentuacao! \n\n");
 
-    int opcao, cont;
+    int opcao, contador;
 
    do{
-        cont = 0;
+        contador = 0;
 
-        printf("1 - Login | 2 - Fazer cadastro | 3 - Sair do programa \n\nO que você deseja fazer? ");
+        printf("1 - Login | 2 - Fazer cadastro | 3 - Sair do programa \n\nO que voce deseja fazer? ");
         scanf("%d%*c", &opcao);
 
         switch(opcao){
@@ -23,8 +23,8 @@ void iniciar(){
                 system("clear");
                 break;
             case 2:
+            	cadastrarFuncionario();
                 system("clear");
-                cadastrarFuncionario();
                 break;
             case 3:
                 system("clear");
@@ -33,8 +33,8 @@ void iniciar(){
             default:
                 printf("\nOpcao invalida!\n\n");
                 printf("-----------------------------------------------------------------------------------------------------------\n\n");
-                cont++;
+                contador++;
         }
-    }while(cont != 0);
+    }while(contador != 0);
 
 }

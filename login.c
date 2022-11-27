@@ -1,12 +1,12 @@
-#include "data.h"
-#include "funcionario.h"
-#include "produto.h" 
+#include "arquivosCabecalho/data.h"
+#include "arquivosCabecalho/funcionario.h"
+#include "arquivosCabecalho/produto.h"
 
 int login(){
 
-    database_funcionarios = fopen("arquivos/funcionarios.txt", "r+");
+    baseDeDadosFuncionarios = fopen("baseDeDados/funcionarios.txt", "r+");
 
-    if(database_funcionarios == NULL){
+    if(baseDeDadosFuncionarios == NULL){
         printf("Erro na abertura do arquivo funcionarios.txt!\n\n");
         return 0;
     }
@@ -21,7 +21,9 @@ int login(){
 
     printf("Senha: ");
     scanf("%[^\n]%*c", senha);
-    system("clear");
-    menu();
+    
+	system("clear");
+    
+	menuPrincipal();
 
 }

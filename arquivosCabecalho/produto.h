@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include "data.h" 
 
 struct produtos{
     char id;
@@ -14,7 +13,7 @@ struct produtos{
     Data dataDeCadastro;
 }Produtos;
 
-FILE *database_produtos; // base de dados dos produtos
+FILE *baseDeDadosProdutos;
 
 int cadastrarProduto();
 int removerProdutos();

@@ -1,20 +1,23 @@
-#include "data.h"
-#include "funcionario.h"
-#include "produto.h" 
+#include "arquivosCabecalho/data.h"
+#include "arquivosCabecalho/funcionario.h"
+#include "arquivosCabecalho/produto.h"
 
-void menu(){
+void menuPrincipal(){
+
     printf("-----------------------------------------------------------------------------------------------------------\n\n");
     printf("\n\t\t\t\t    OLA, SEJA BEM VINDO AO POWER SYSTEM!\n\n");
 
-    int opcao, cont;
+    int opcao, contador;
 
     do{
-        cont = 0;
+        contador = 0;
 
         printf("1 - Cadastrar produto | 2 - Atualizar produto | 3 - Deletar produto | 4 - Estoque total | 5 - Logout\n\nO que voce deseja fazer? ");
         scanf("%d%*c", &opcao);
-        printf("\n");
-        system("clear");
+        
+		printf("\n");
+        
+		system("clear");
         switch(opcao){
             case 1:
                 printf("\n-----------------------------------------------------------------------------------------------------------\n");
@@ -24,36 +27,36 @@ void menu(){
                 }else{
                     printf("Erro ao cadastrar o produto");
                 }
-                menu();
+                menuPrincipal();
                 break;
             case 2:
                 system("clear");
                 atualizarProduto();
-                menu();
+                menuPrincipal();
                 break;
             case 3:
                 system("clear");
                 removerProdutos();
-                menu();
+                menuPrincipal();
                 break;
 
             case 4:
                 system("clear");
                 listarProdutos();
-                menu();
+                menuPrincipal();
                 break;
 
             case 5:
                 system("clear");
-                iniciar();
+                menuInicial();
                 break;
 
             default:
                 printf("Opcao invalida! \n\n");
-                cont++;
+                contador++;
                 printf("\n-----------------------------------------------------------------------------------------------------------\n");
                 break;
         }
-    }while(cont != 0);
+    }while(contador != 0);
 
 }

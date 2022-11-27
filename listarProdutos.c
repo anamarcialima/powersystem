@@ -1,11 +1,12 @@
-#include "data.h"
-#include "funcionario.h"
-#include "produto.h" 
+#include "arquivosCabecalho/data.h"
+#include "arquivosCabecalho/funcionario.h"
+#include "arquivosCabecalho/produto.h"
 
 int listarProdutos(){
-    database_produtos = fopen("arquivos/produtos.txt", "a+");
 
-    if(database_produtos == NULL){
+    baseDeDadosProdutos = fopen("baseDeDados/produtos.txt", "a+");
+
+    if(baseDeDadosProdutos == NULL){
         printf("Erro na abertura do arquivo produtos.txt!\n\n");
         return 1;
     }
@@ -15,16 +16,16 @@ int listarProdutos(){
 
     int id = 1; char dados[1001];
 
-    if(fgets(dados, 1001, database_produtos) == NULL){
+    if(fgets(dados, 1001, baseDeDadosProdutos) == NULL){
         printf("Estoque vazio\n\n");
         return 0;
     }else{
         do{
             printf("ID: %d  %s", id, dados);
             ++id;
-        }while(fgets(dados, 1001, database_produtos) != NULL);
+        }while(fgets(dados, 1001, baseDeDadosProdutos) != NULL);
     }
-    
-    fclose(database_produtos);
+
+    fclose(baseDeDadosProdutos);
     return id - 1;
 }

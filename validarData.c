@@ -1,6 +1,6 @@
-#include "data.h"
-#include "funcionario.h"
-#include "produto.h" 
+#include "arquivosCabecalho/data.h"
+#include "arquivosCabecalho/funcionario.h"
+#include "arquivosCabecalho/produto.h"
 
 int verificarData(Data verificando){
 
@@ -25,4 +25,5 @@ int verificarData(Data verificando){
         printf("Ano invalido! Digite novamente!\n\n");
         return 0;
     }
+
 }

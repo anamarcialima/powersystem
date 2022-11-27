@@ -1,11 +1,13 @@
-#include "data.h"
-#include "funcionario.h"
-#include "produto.h" 
+#include "arquivosCabecalho/data.h"
+#include "arquivosCabecalho/funcionario.h"
+#include "arquivosCabecalho/produto.h"
 
 int main(){
 
     setlocale(LC_ALL,"portuguese");
-    iniciar();
+    
+	menuInicial();
 
-    return 0;
+    exit(0);
+
 }

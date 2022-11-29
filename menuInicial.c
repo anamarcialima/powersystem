@@ -20,14 +20,14 @@ void menuInicial(){
         switch(opcao){
             case 1:
                 login();
-                system("clear");
+                limpar();
                 break;
             case 2:
             	cadastrarFuncionario();
-                system("clear");
+                limpar();
                 break;
             case 3:
-                system("clear");
+                limpar();
                 exit(0);
                 break;
             default:

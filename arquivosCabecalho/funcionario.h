@@ -23,5 +23,6 @@ void menuInicial();
 int login();
 int cadastrarFuncionario();
 void menuPrincipal();
+void limpar();
 
 #endif

@@ -17,7 +17,7 @@ void menuPrincipal(){
         
 		printf("\n");
         
-		system("clear");
+		limpar();
         switch(opcao){
             case 1:
                 printf("\n-----------------------------------------------------------------------------------------------------------\n");
@@ -30,24 +30,24 @@ void menuPrincipal(){
                 menuPrincipal();
                 break;
             case 2:
-                system("clear");
+                limpar();
                 atualizarProduto();
                 menuPrincipal();
                 break;
             case 3:
-                system("clear");
+                limpar();
                 removerProdutos();
                 menuPrincipal();
                 break;
 
             case 4:
-                system("clear");
+                limpar();
                 listarProdutos();
                 menuPrincipal();
                 break;
 
             case 5:
-                system("clear");
+                limpar();
                 menuInicial();
                 break;
 

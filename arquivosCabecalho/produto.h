@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include "data.h"
 
 #ifndef PRODUTO_H_INCLUDED
 #define PRODUTO_H_INCLUDED

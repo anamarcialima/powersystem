@@ -15,14 +15,8 @@ struct funcionario{
     char cargo[15];
 }Funcionario;
 
-int opc;
-
 FILE *baseDeDadosFuncionarios;
 
-void menuInicial();
-int login();
 int cadastrarFuncionario();
-void menuPrincipal();
-void limpar();
 
 #endif

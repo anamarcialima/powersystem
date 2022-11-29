@@ -14,7 +14,6 @@ struct data{
     int ano;
 };
 
-
-int verificarData(Data verificando);
+int validarData(Data validando);
 
 #endif

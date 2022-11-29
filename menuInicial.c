@@ -1,6 +1,7 @@
 #include "arquivosCabecalho/data.h"
 #include "arquivosCabecalho/funcionario.h"
 #include "arquivosCabecalho/produto.h"
+#include "arquivosCabecalho/programa.h"
 
 void menuInicial(){
 
@@ -11,7 +12,7 @@ void menuInicial(){
 
     int opcao, contador;
 
-   do{
+    do{
         contador = 0;
 
         printf("1 - Login | 2 - Fazer cadastro | 3 - Sair do programa \n\nO que voce deseja fazer? ");
@@ -20,14 +21,14 @@ void menuInicial(){
         switch(opcao){
             case 1:
                 login();
-                limpar();
+                limparTerminal();
                 break;
             case 2:
             	cadastrarFuncionario();
-                limpar();
+                limparTerminal();
                 break;
             case 3:
-                limpar();
+                limparTerminal();
                 exit(0);
                 break;
             default:

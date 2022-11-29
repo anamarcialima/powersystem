@@ -1,18 +1,13 @@
 #include "arquivosCabecalho/data.h"
 #include "arquivosCabecalho/funcionario.h"
-#include "arquivosCabecalho/produto.h"
+#include "arquivosCabecalho/programa.h"
 
 int cadastrarFuncionario(){
 
+    validarBaseDeDadosFuncionario(baseDeDadosFuncionarios);
+    
     printf("\n\n-----------------------------------------------------------------------------------------------------------\n");
     printf("\t\t\t\t\t\t FAZER CADASTRO \n\n");
-
-    baseDeDadosFuncionarios = fopen("baseDeDados/funcionarios.txt", "a");
-
-    if(baseDeDadosFuncionarios == NULL){
-        printf("Erro na abertura do arquivo fucionarios.txt!\n\n");
-        return 1;
-    }
 
     printf("E-mail: ");
     scanf("%[^\n]%*c", Funcionario.email);
@@ -24,7 +19,7 @@ int cadastrarFuncionario(){
 
     printf("Nome: ");
     scanf("%[^\n]%*c", Funcionario.nomeDoFuncionario);
-    fprintf(baseDeDadosFuncionarios, "Nome: %s  ", Funcionario.nomeDoFuncionario); //ARMAZENAR O DADO NO ARQUIVO
+    fprintf(baseDeDadosFuncionarios, "Nome: %s  ", Funcionario.nomeDoFuncionario);
 
     printf("Telefone: ");
     scanf("%d%*c", &Funcionario.telefone);
@@ -33,7 +28,7 @@ int cadastrarFuncionario(){
     do{
         printf("Data de nascimento: ");
         scanf("%d/%d/%d%*c", &Funcionario.dataNascimento.dia, &Funcionario.dataNascimento.mes, &Funcionario.dataNascimento.ano);
-    }while(verificarData(Funcionario.dataNascimento) == 0);
+    }while(validarData(Funcionario.dataNascimento) == 0);
 
     fprintf(baseDeDadosFuncionarios, "Data de nascimento: %d/%d/%d  ", Funcionario.dataNascimento.dia, Funcionario.dataNascimento.mes,Funcionario.dataNascimento.ano);
 
@@ -46,5 +41,4 @@ int cadastrarFuncionario(){
     fclose(baseDeDadosFuncionarios);
 
     login();
-
 }

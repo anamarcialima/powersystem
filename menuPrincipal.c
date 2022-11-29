@@ -1,6 +1,7 @@
 #include "arquivosCabecalho/data.h"
 #include "arquivosCabecalho/funcionario.h"
 #include "arquivosCabecalho/produto.h"
+#include "arquivosCabecalho/programa.h"
 
 void menuPrincipal(){
 
@@ -17,7 +18,7 @@ void menuPrincipal(){
         
 		printf("\n");
         
-		limpar();
+		limparTerminal();
         switch(opcao){
             case 1:
                 printf("\n-----------------------------------------------------------------------------------------------------------\n");
@@ -30,24 +31,24 @@ void menuPrincipal(){
                 menuPrincipal();
                 break;
             case 2:
-                limpar();
+                limparTerminal();
                 atualizarProduto();
                 menuPrincipal();
                 break;
             case 3:
-                limpar();
+                limparTerminal();
                 removerProdutos();
                 menuPrincipal();
                 break;
 
             case 4:
-                limpar();
+                limparTerminal();
                 listarProdutos();
                 menuPrincipal();
                 break;
 
             case 5:
-                limpar();
+                limparTerminal();
                 menuInicial();
                 break;
 

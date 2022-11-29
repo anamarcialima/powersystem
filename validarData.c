@@ -2,16 +2,16 @@
 #include "arquivosCabecalho/funcionario.h"
 #include "arquivosCabecalho/produto.h"
 
-int verificarData(Data verificando){
+int validarData(Data validando){
 
-    if (verificando.ano >= 1900 && verificando.ano <= 9999){
-        if (verificando.mes >= 1 && verificando.mes <= 12){
-            if ((verificando.dia >= 1 && verificando.dia <= 31) && (verificando.mes == 1 || verificando.mes == 3 || verificando.mes == 5 || verificando.mes == 7 || verificando.mes == 8 || verificando.mes == 10 || verificando.mes == 12)){
-            }else if ((verificando.dia >= 1 && verificando.dia <= 30) && (verificando.mes == 4 || verificando.mes == 6 || verificando.mes == 9 || verificando.mes == 11)){
+    if (validando.ano >= 1900 && validando.ano <= 9999){
+        if (validando.mes >= 1 && validando.mes <= 12){
+            if ((validando.dia >= 1 && validando.dia <= 31) && (validando.mes == 1 || validando.mes == 3 || validando.mes == 5 || validando.mes == 7 || validando.mes == 8 || validando.mes == 10 || validando.mes == 12)){
+            }else if ((validando.dia >= 1 && validando.dia <= 30) && (validando.mes == 4 || validando.mes == 6 || validando.mes == 9 || validando.mes == 11)){
                 return 1;
-            }else if ((verificando.dia >= 1 && verificando.dia <= 28) && (verificando.mes == 2)){
+            }else if ((validando.dia >= 1 && validando.dia <= 28) && (validando.mes == 2)){
                 return 1;
-            }else if (verificando.dia == 29 && verificando.mes == 2 && (verificando.ano % 400 == 0 || (verificando.ano % 4 == 0 && verificando.ano % 100 != 0))){
+            }else if (validando.dia == 29 && validando.mes == 2 && (validando.ano % 400 == 0 || (validando.ano % 4 == 0 && validando.ano % 100 != 0))){
                 return 1;
             }else{
                 printf("\nDia invalido! Digite novamente!\n\n");
@@ -25,5 +25,4 @@ int verificarData(Data verificando){
         printf("Ano invalido! Digite novamente!\n\n");
         return 0;
     }
-
 }

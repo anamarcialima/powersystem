@@ -1,6 +1,4 @@
-#include "arquivosCabecalho/data.h"
-#include "arquivosCabecalho/funcionario.h"
-#include "arquivosCabecalho/produto.h"
+#include "arquivosCabecalho/programa.h"
 
 int main(){
 
@@ -9,5 +7,4 @@ int main(){
 	menuInicial();
 
     exit(0);
-
 }

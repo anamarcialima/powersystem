@@ -1,15 +1,6 @@
-#include "arquivosCabecalho/data.h"
-#include "arquivosCabecalho/funcionario.h"
-#include "arquivosCabecalho/produto.h"
+#include "arquivosCabecalho/programa.h"
 
 int login(){
-
-    baseDeDadosFuncionarios = fopen("baseDeDados/funcionarios.txt", "r+");
-
-    if(baseDeDadosFuncionarios == NULL){
-        printf("Erro na abertura do arquivo funcionarios.txt!\n\n");
-        return 0;
-    }
 
     printf("\n-----------------------------------------------------------------------------------------------------------\n");
     printf("\t\t\t\t\t\t    LOGIN \n\n");
@@ -22,8 +13,7 @@ int login(){
     printf("Senha: ");
     scanf("%[^\n]%*c", senha);
     
-	limpar();
+	limparTerminal();
     
 	menuPrincipal();
-
 }

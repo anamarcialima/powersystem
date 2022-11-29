@@ -1,6 +1,10 @@
 {
     "files.associations": {
-        "funcoes.h": "c"
+        "funcoes.h": "c",
+        "produto.h": "c",
+        "funcionario.h": "c",
+        "programa.h": "c",
+        "stdlib.h": "c"
     },
     "cSpell.words": [
         "Produtos"

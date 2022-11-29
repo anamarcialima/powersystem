@@ -3,5 +3,7 @@ E-mail: anamarcia  Senha: 123  Nome: Ana Marcia  Telefone: 22222  Data de nascim
 
 E-mail: naelly  Senha: 121324  Nome: Naelly Freire  Telefone: 871080381  Data de nascimento: 3/4/2002  Cargo: DevOps
 
-E-mail: dwjf  Senha: fdjpjg  Nome: sdosj  Telefone: -1116814925  Data de nascimento: 3/4/2002  Cargo: hjfg
+E-mail: justin  Senha: 123  Nome: justin  Telefone: 99999  Data de nascimento: 22/10/2002  Cargo: gerente
+
+E-mail: ana  Senha: 123  Nome: ajaja  Telefone: 88  Data de nascimento: 22/10/2002  Cargo: gerente
 

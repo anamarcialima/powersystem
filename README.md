@@ -7,4 +7,4 @@ O sistema desenvolvido tem como objetivo automatizar e facilitar a gerência do 
 Esse código e simples é feita somente em linguagem C.
 
 Comando pra executar:
-gcc main.c menuInicial.c validarData.c removerProdutos.c listarProdutos.c atualizarProduto.c cadastrarProduto.c cadastrarFuncionario.c login.c menuPrincipal.c limpar.c -o teste.exe
+gcc main.c menuInicial.c menuPrincipal.c login.c validarData.c funcoesProduto.c funcoesFuncionario.c limparTerminal.c validarBaseDeDados.c -o main.exe

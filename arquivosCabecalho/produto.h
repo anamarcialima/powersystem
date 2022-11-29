@@ -3,6 +3,9 @@
 #include <string.h>
 #include <locale.h>
 
+#ifndef PRODUTO_H_INCLUDED
+#define PRODUTO_H_INCLUDED
+
 struct produtos{
     char id;
     char nomeDoProduto[200];
@@ -19,3 +22,5 @@ int cadastrarProduto();
 int removerProdutos();
 int atualizarProduto();
 int listarProdutos();
+
+#endif

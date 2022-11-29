@@ -3,6 +3,9 @@
 #include <string.h>
 #include <locale.h>
 
+#ifndef DATA_H_INCLUDED
+#define DATA_H_INCLUDED
+
 typedef struct data Data;
 
 struct data{
@@ -13,3 +16,5 @@ struct data{
 
 
 int verificarData(Data verificando);
+
+#endif

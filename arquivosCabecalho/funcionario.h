@@ -3,6 +3,9 @@
 #include <string.h>
 #include <locale.h>
 
+#ifndef FUNCIONARIO_H_INCLUDED
+#define FUNCIONARIO_H_INCLUDED
+
 struct funcionario{
     char nomeDoFuncionario[200];
     char email[100];
@@ -20,3 +23,5 @@ void menuInicial();
 int login();
 int cadastrarFuncionario();
 void menuPrincipal();
+
+#endif

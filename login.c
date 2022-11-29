@@ -22,7 +22,7 @@ int login(){
     printf("Senha: ");
     scanf("%[^\n]%*c", senha);
     
-	system("clear");
+	limpar();
     
 	menuPrincipal();
 
